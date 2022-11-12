@@ -3,6 +3,12 @@
     grid-template-columns: repeat(4, 1fr);
     row-gap: 40px;
     column-gap: 20px;
+
+    @media (max-width: 800px) {
+        grid-template-columns: 1fr 1fr;
+        margin:  auto 10px;
+        column-gap: 15px;
+      }
 }
 .category-title{
     text-align: center;
