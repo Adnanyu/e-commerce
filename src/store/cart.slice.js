@@ -1,4 +1,67 @@
-import { createContext , useReducer} from "react";
+import {  createSlice } from "@reduxjs/toolkit";
+
+
+const initialState = {
+    isCartOpen: false,
+    cartItems: [],
+    cartCount: 0,
+    cartTotal: 0
+};
+
+
+
+const cartSlice = createSlice({
+    name: 'cart',
+    initialState,
+    reducers: {
+        calculateTotals: (state) => {
+            let totalQuantity = 0;
+            let totalPrice = 0;
+            state.cartItems.forEach((item) => {
+              totalQuantity += item.quantity;
+              totalPrice += item.quantity * item.price;
+            });
+            state.cartCount = totalQuantity;
+            state.cartTotal = totalPrice;
+          },
+        setIsCartOpen(state) {
+            state.isCartOpen = !state.isCartOpen
+        },
+        addToCart(state, action) {
+            const newItem = { ...action.payload, quantity: 1 };
+            // to check if item is already available
+            const existingItem = state.cartItems.find(
+                (item) => item.id === newItem.id);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                state.cartItems.push(newItem)
+            }
+        },
+        removeCartItem(state, action) {
+            const itemToRemove = action.payload
+            const existingCartItem = state.cartItems.find(
+                (item) => item.id === itemToRemove.id);
+            
+            if (existingCartItem.quantity === 1) {
+                state.cartItems = state.cartItems.filter((item) => item.id !== itemToRemove.id);
+            } else {
+                existingCartItem.quantity--;
+            }
+        },
+        clearCartItem(state, action) {
+            const itemToClear = action.payload
+            state.cartItems = state.cartItems.filter(cartItem => cartItem.id !== itemToClear.id);
+        },
+
+    }
+})
+export default cartSlice.reducer
+export const {addToCart, removeCartItem, clearCartItem, setIsCartOpen, calculateTotals} = cartSlice.actions
+
+
+/*mport { createContext , useReducer} from "react";
 
 import { creactAction } from "../utilities/reducer/reducer.util";
 
@@ -34,7 +97,7 @@ export const CartContext = createContext({
     addItemToCart: () => {},
     removeItemFromCart: () => {},
     ClearItemFromCart: () => {},
-    cartCount: 9,
+    cartCount: 0,
     cartTotal: 0
 })
 const CART_ACTION_TYPES = {
@@ -44,7 +107,7 @@ const CART_ACTION_TYPES = {
 const INITIAL_STATE = {
     isCartOpen: false,
     cartItems: [],
-    cartCount: 9,
+    cartCount: 0,
     cartTotal: 0
 };
 
@@ -69,7 +132,7 @@ const cartReducer = (state, action) => {
 
 export const CartProvider = ({children}) => {
     
-    const [{isCartOpen, cartItems, cartCount, cartTotal}, dispatch]= useReducer(cartReducer, INITIAL_STATE)
+   const [{isCartOpen, cartItems, cartCount, cartTotal}, dispatch]= useReducer(cartReducer, INITIAL_STATE)
 
     const updateCartItemsReducer = (newCartItem) => {
 
@@ -99,16 +162,4 @@ export const CartProvider = ({children}) => {
     const setIsCartOpen = (bool) => {
         dispatch(creactAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, bool))
     }
-    const value = { 
-        isCartOpen, 
-        setIsCartOpen, 
-        addItemToCart, 
-        removeItemFromCart, 
-        clearItemFromCart, 
-        cartItems , 
-        cartCount, 
-        cartTotal};
-    return(
-       <CartContext.Provider value={value}>{children}</CartContext.Provider> 
-    )
-}
+    */

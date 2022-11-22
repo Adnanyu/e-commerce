@@ -3,9 +3,12 @@ import { useContext } from 'react'
 import { CartContext } from '../../contexts/cart.context'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
 import PaymentForm from '../../components/paymant-form/payment.form.component'
+import { calculateTotals } from '../../store/cart.slice'
+import { useDispatch, useSelector } from 'react-redux' 
 
 const Checkout = () => {
-    const { cartItems, cartTotal } = useContext(CartContext)
+    const { cartItems, cartTotal } = useSelector(state => state.cart)
+    const dispatch = useDispatch()
     return(
         <div className='checkout-container'>
             <div className='checkout-header'>
@@ -29,6 +32,7 @@ const Checkout = () => {
             ))}
             <span className='total'>Total: ${cartTotal}</span>
             <PaymentForm />
+            <button onClick={() => dispatch(calculateTotals())}></button>
         </div>
     )
 }

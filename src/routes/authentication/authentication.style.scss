@@ -4,4 +4,10 @@
     justify-content: center;
     margin: 30px auto;
     width: 900px;
+    @media(max-width: 800px){
+        display: grid;
+        grid-template-columns: 1fr ;
+        margin: 30px auto;
+        width: auto;
+    }
 }
