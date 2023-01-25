@@ -1,4 +1,5 @@
 import Directory from '../../components/directory.component/directory-component'
+import Main from '../../components/main/main';
 
 const  Home = () => {
 
@@ -6,8 +7,11 @@ const  Home = () => {
 
     
   
-    return (
+  return (
+    <>
+      <Main/>
       <Directory />
+    </>
     );
   }
   

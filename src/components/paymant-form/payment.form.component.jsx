@@ -1,5 +1,4 @@
-import { useState, useContext} from 'react'
-import { CartContext } from '../../contexts/cart.context'
+import { useState} from 'react'
 import { useSelector } from 'react-redux'
 import './payment.form.style.scss'
 import Button from '../button.component/button.component'
@@ -10,9 +9,9 @@ const PaymentForm = () => {
     const element = useElements()
     const [isProcessingPayment , setIsProcessingPayment] = useState(false)
 
-    const { cartTotal } = useContext(CartContext)
     const  currentUser  = useSelector((state) => state.user.currentUser)
-
+    const  cartTotal  = useSelector((state) => state.cart.cartTotal)
+    
     const paymentHandler = async(e) => {
         e.preventDefault();
 

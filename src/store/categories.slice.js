@@ -1,9 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { creactAction } from "../utilities/reducer/reducer.util";
-
-const CATEGORIES_ACTION_TYPES = {
-    SET_CATEGORIES_MAP: 'categories/SET_CATEGORIES_MAP'
-}
 
 export const initialState = {
     categoriesMap: []

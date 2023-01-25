@@ -1,5 +1,3 @@
-import { initilizeApp } from 'firebase/app';
-
 import {
     getAuth,
     signInWithRedirect,

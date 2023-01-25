@@ -1,9 +1,7 @@
 import { ReactComponent as ShoppingCart } from '../../assests/shopping-bag.svg';
 import './cart-icon.style.scss'
-import { useContext } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
 import { setIsCartOpen } from '../../store/cart.slice';
-import { CartContext } from '../../contexts/cart.context'
 
 const CartIcon = () => {
     const dispatch = useDispatch()

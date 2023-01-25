@@ -2,8 +2,7 @@ import { useState } from "react";
 import FormInput from "../form-input-component/form-input.component";
 
 import { signInAuthUserWithEmailAndPassword, 
-    signInWithGooglePopup, 
-    createUserDocumentFromAuth } from '../../utilities/firebase/firebase.utils'
+    signInWithGooglePopup } from '../../utilities/firebase/firebase.utils'
 import './sign-in-form.style.scss'
 import Button from "../button.component/button.component";
 const defaultFormFeilds = {
@@ -33,9 +32,9 @@ const SignInForm = ()=> {
   
             resetFormFeilds()
         }catch(error){
-            if(error.code == 'auth/wrong-password'){
+            if(error.code === 'auth/wrong-password'){
                 alert('the password you entered is incorrect')
-            }else if(error.code == 'auth/user-not-found'){
+            }else if(error.code === 'auth/user-not-found'){
                 alert('this email doesnt exist')
             }
             console.log(error)
